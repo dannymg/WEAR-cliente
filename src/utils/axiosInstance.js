@@ -1,23 +1,23 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:4000',
+  baseURL: "https://wear-backend-dev-rqtt.1.us-1.fl0.io",
 });
 
 axiosInstance.interceptors.request.use(
   function (config) {
     config.headers = {
       ...config.headers,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     };
-    const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem("token") || "";
     if (token) {
-      config.headers['x-access-token'] = token;
+      config.headers["x-access-token"] = token;
     }
 
     return config;
   },
   function (error) {
     return Promise.reject(error);
-  },
+  }
 );
